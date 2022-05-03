@@ -1,0 +1,94 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css" />
+
+<style>
+.slick_slider img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    object-position: center center;
+}
+.slider.slick_slider {
+    position: relative;
+}
+.slider.slick_slider button.slick-arrow {
+    position: absolute;
+    top: 50%;
+}
+.slick_slider button.slick-prev {
+    left: 5%;
+    z-index: 1;
+}
+.slick_slider button.slick-next {
+    right: 5%;
+    z-index: 1;
+}
+</style>
+
+  <div class="slider slick_slider">
+    {%- for block in section.blocks -%}
+      <div class="item">
+          <img src="{{ block.settings.image | image_url: width: 1500 }}">
+      </div>
+  	{%- endfor -%}
+  </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Slick script -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+<script type="text/javascript">
+  $('.slider').slick({
+    dots: true,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 2000
+  });
+</script>
+
+
+
+
+{% schema %}
+  {
+    "name": "slick_slider",
+    "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.image-banner.settings.image.label"
+        },
+        {
+          "type": "color",
+          "id": "color_heading",
+          "label": "Heading color",
+          "default": "#FFFFFF"
+        } 
+	],
+	"presets" : [
+		{
+          "name" : "slick_slider"
+		}
+	],
+
+	  "blocks": [
+        {
+          "type": "slide",
+          "name": "t:sections.slideshow.blocks.slide.name",
+          "limit": 5,
+          "settings": [
+            {
+              "type": "image_picker",
+              "id": "image",
+              "label": "t:sections.slideshow.blocks.slide.settings.image.label"
+            }
+          ]
+        }
+      ]
+
+  }
+{% endschema %}
+
